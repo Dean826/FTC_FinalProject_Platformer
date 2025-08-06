@@ -7,6 +7,27 @@ move_x = keyboard_check(vk_right) - keyboard_check(vk_left);
 
 /// @DnDAction : YoYo Games.Common.Variable
 /// @DnDVersion : 1
+/// @DnDHash : 366A31BE
+/// @DnDArgument : "expr" "keyboard_check(vk_left) || gamepad_button_check(0,gp_padl) || (gamepad_axis_value(0,gp_axislh) < -0.2)"
+/// @DnDArgument : "var" "controls_input_left"
+controls_input_left = keyboard_check(vk_left) || gamepad_button_check(0,gp_padl) || (gamepad_axis_value(0,gp_axislh) < -0.2);
+
+/// @DnDAction : YoYo Games.Common.Variable
+/// @DnDVersion : 1
+/// @DnDHash : 09FB1111
+/// @DnDArgument : "expr" "keyboard_check(vk_right) || gamepad_button_check(0,gp_padr) || (gamepad_axis_value(0,gp_axislh) > 0.2)"
+/// @DnDArgument : "var" "controls_input_right"
+controls_input_right = keyboard_check(vk_right) || gamepad_button_check(0,gp_padr) || (gamepad_axis_value(0,gp_axislh) > 0.2);
+
+/// @DnDAction : YoYo Games.Common.Variable
+/// @DnDVersion : 1
+/// @DnDHash : 7ED95190
+/// @DnDArgument : "expr" "controls_input_right - controls_input_left"
+/// @DnDArgument : "var" "move_x"
+move_x = controls_input_right - controls_input_left;
+
+/// @DnDAction : YoYo Games.Common.Variable
+/// @DnDVersion : 1
 /// @DnDHash : 64417CC1
 /// @DnDArgument : "expr" "move_x * walk_speed"
 /// @DnDArgument : "var" "move_x"
@@ -78,3 +99,33 @@ var l1F138DC6_0 = instance_place(0, y + 2, [collison_death]);if ((l1F138DC6_0 >
 	/// @DnDHash : 190D23B0
 	/// @DnDParent : 1F138DC6
 	room_restart();}
+
+/// @DnDAction : YoYo Games.Gamepad.If_Gamepad_Button_Pressed
+/// @DnDVersion : 1.1
+/// @DnDHash : 7C978E25
+/// @DnDArgument : "btn" "gp_face1"
+var l7C978E25_0 = 0;var l7C978E25_1 = gp_face1;if(gamepad_is_connected(l7C978E25_0) && gamepad_button_check_pressed(l7C978E25_0, l7C978E25_1)){	/// @DnDAction : YoYo Games.Common.Function_Call
+	/// @DnDVersion : 1
+	/// @DnDHash : 22374DBA
+	/// @DnDInput : 3
+	/// @DnDParent : 7C978E25
+	/// @DnDArgument : "function" "gamepad_set_vibration"
+	/// @DnDArgument : "arg" "0"
+	/// @DnDArgument : "arg_1" "0.7"
+	/// @DnDArgument : "arg_2" "0.7"
+	gamepad_set_vibration(0, 0.7, 0.7);
+
+	/// @DnDAction : YoYo Games.Instances.Set_Alarm
+	/// @DnDVersion : 1
+	/// @DnDHash : 24308AC2
+	/// @DnDParent : 7C978E25
+	/// @DnDArgument : "steps" "15"
+	alarm_set(0, 15);
+
+	/// @DnDAction : YoYo Games.Common.Variable
+	/// @DnDVersion : 1
+	/// @DnDHash : 023B953A
+	/// @DnDParent : 7C978E25
+	/// @DnDArgument : "expr" "-jump_speed"
+	/// @DnDArgument : "var" "move_y"
+	move_y = -jump_speed;}
